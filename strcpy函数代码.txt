@@ -10,3 +10,40 @@ strcpy函数代码
 
 **/
 
+//自己实现字符串拷贝函数
+char* StrCpy(char* src)
+//1、计算 src 的长度 len
+//2、用 malloc 申请长度为 len+1 的内存空间
+//3、将 src 字符串逐个字符复制到新由请的内存空间
+//4、新申请内存空间的最后一位放入 '\0'
+//5、返回新申请的内存空间指针
+ #include <stdio.h>  
+ #include <stdlib.h>  
+ #include <string.h>  
+   char* strcpy(char* dest, const char* src) {  
+ // 1、计算 src 的长度 len  
+ size_t len = strlen(src);  
+   // 2、用malloc申请长度 len+1 的内存空间  
+ char* dest_ptr = (char*)malloc((len + 1) * sizeof(char));  
+ if (dest_ptr == NULL) {  
+ printf("Memory allocation failed!\n");  
+ return NULL;  
+ }  
+   // 3、将src字符串逐个字符复制到新申请的内存空间  
+ for (size_t i = 0; i < len; i++) {  
+ dest_ptr[i] = src[i];  
+ }  
+   // 4、新申请内存空间的最后一位放入'\0'  
+ dest_ptr[len] = '\0';  
+   // 5、返回新申请的内存空间指针  
+ return dest_ptr;  
+ }  
+   int main() {  
+ const char* src = "Hello, World!";  
+ char* dest = strcpy(NULL, src); // 使用 NULL 来自动分配内存空间，这样函数可以返回新字符串的指针。  
+ if (dest != NULL) {  
+ printf("Copied string: %s\n", dest);  
+ free(dest); // 释放分配的内存空间。  
+ }  
+ return 0;  
+ } 
